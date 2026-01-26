@@ -1,26 +1,110 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-background: #ffffff;
+  --color-foreground: #171717;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* WhatsApp */
+  --color-wa-dark-green: #075E54;
+  --color-wa-teal: #128C7E;
+  --color-wa-green: #25D366;
+  --color-wa-sent: #D9FDD3;
+  --color-wa-chat-bg: #ECE5DD;
+  --color-wa-blue-tick: #53BDEB;
+  --color-wa-received: #FFFFFF;
+  --color-wa-text: #111B21;
+  --color-wa-text-secondary: #667781;
+
+  /* Facebook */
+  --color-fb-blue: #0084FF;
+  --color-fb-received: #E4E6EB;
+  --color-fb-active: #31A24C;
+  --color-fb-text: #050505;
+  --color-fb-text-secondary: #65676B;
+
+  /* Instagram */
+  --color-ig-blue: #3797F0;
+  --color-ig-received: #EFEFEF;
+  --color-ig-text: #262626;
+  --color-ig-text-secondary: #8E8E8E;
+  --color-ig-border: #DBDBDB;
+
+  /* X/Twitter */
+  --color-x-blue: #1D9BF0;
+  --color-x-received: #EFF3F4;
+  --color-x-text: #0F1419;
+  --color-x-text-secondary: #536471;
+  --color-x-border: #EFF3F4;
+
+  /* Font */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+}
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 3px;
+}
+
+/* WhatsApp doodle background */
+.wa-chat-bg {
+  background-color: #ECE5DD;
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c8c3ba' fill-opacity='0.15'%3E%3Ccircle cx='10' cy='10' r='2'/%3E%3Ccircle cx='40' cy='20' r='1.5'/%3E%3Ccircle cx='70' cy='15' r='1'/%3E%3Ccircle cx='20' cy='45' r='1.5'/%3E%3Ccircle cx='55' cy='50' r='2'/%3E%3Ccircle cx='15' cy='70' r='1'/%3E%3Ccircle cx='45' cy='65' r='1.5'/%3E%3Ccircle cx='70' cy='72' r='2'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Phone frame styles */
+.phone-frame {
+  width: 375px;
+  max-height: 812px;
+  border-radius: 40px;
+  border: 8px solid #1a1a1a;
+  overflow: hidden;
+  position: relative;
+  background: #000;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.phone-frame-inner {
+  border-radius: 32px;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* WhatsApp bubble tails */
+.wa-bubble-received-first::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -8px;
+  width: 0;
+  height: 0;
+  border-top: 0 solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 8px solid #FFFFFF;
+}
+
+.wa-bubble-sent-first::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -8px;
+  width: 0;
+  height: 0;
+  border-top: 0 solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 8px solid #D9FDD3;
 }
