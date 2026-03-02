@@ -54,7 +54,7 @@ export default function WhatsAppPage() {
       {/* SEO Content */}
       <section className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
         <h2 className="text-2xl font-bold text-gray-900">
-          Free WhatsApp Fake Chat Generator
+          Free WhatsApp Chat Mockup Generator
         </h2>
         <p className="mt-4 text-gray-600 leading-relaxed">
           Create realistic WhatsApp chat screenshots with our free online generator.

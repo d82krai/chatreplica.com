@@ -54,7 +54,7 @@ export default function FacebookPage() {
       {/* SEO Content */}
       <section className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
         <h2 className="text-2xl font-bold text-gray-900">
-          Free Facebook Messenger Fake Chat Generator
+          Free Facebook Messenger Chat Mockup Generator
         </h2>
         <p className="mt-4 text-gray-600 leading-relaxed">
           Generate realistic Facebook Messenger chat screenshots with our free

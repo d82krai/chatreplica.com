@@ -6,8 +6,12 @@ import { cn } from "@/lib/utils";
 
 const faqs = [
   {
-    q: "Is ChatReplica completely free?",
-    a: "Yes! ChatReplica is 100% free to use. There are no hidden fees, no sign-ups, and no watermarks on your screenshots.",
+    q: "Is ChatReplica free to use?",
+    a: "Yes! ChatReplica is free to use with no sign-up required. Free downloads include a small watermark. Upgrade to Premium for watermark-free HD exports, batch export, and more.",
+  },
+  {
+    q: "What do I get with ChatReplica Premium?",
+    a: "Premium unlocks 4x HD resolution exports, watermark-free downloads, unlimited messages per chat, batch export across all platforms, custom backgrounds, and priority access to new features.",
   },
   {
     q: "Is my data safe?",
@@ -23,7 +27,7 @@ const faqs = [
   },
   {
     q: "What image format are screenshots?",
-    a: "Screenshots are downloaded as PNG files at 2x retina resolution for crisp, clear images. There are no watermarks added.",
+    a: "Screenshots are downloaded as PNG files at 2x retina resolution for crisp, clear images. Free downloads include a subtle watermark. Premium users get 4x HD resolution with no watermark.",
   },
   {
     q: "Is it legal to use ChatReplica?",

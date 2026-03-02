@@ -1,8 +1,9 @@
 "use client";
 
-import { Download, Smartphone } from "lucide-react";
+import { Download, Smartphone, Crown } from "lucide-react";
 import { captureScreenshot } from "@/lib/screenshot";
 import { Platform } from "@/lib/types";
+import { usePremium } from "@/components/shared/PremiumProvider";
 
 interface ScreenshotButtonProps {
   previewRef: React.RefObject<HTMLDivElement | null>;
@@ -17,16 +18,37 @@ export default function ScreenshotButton({
   showPhoneFrame,
   onToggleFrame,
 }: ScreenshotButtonProps) {
+  const { features, isPremium, openUpgradeModal } = usePremium();
+
   const handleDownload = async () => {
     if (!previewRef.current) return;
-    await captureScreenshot(previewRef.current, platform);
+    await captureScreenshot(previewRef.current, platform, features);
+  };
+
+  const handleHDDownload = () => {
+    if (!isPremium) {
+      openUpgradeModal();
+      return;
+    }
+    handleDownload();
   };
 
   return (
     <div className="space-y-3">
-      <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-500">
-        Export
-      </h3>
+      <div className="flex items-center justify-between">
+        <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-500">
+          Export
+        </h3>
+        {!isPremium && (
+          <button
+            onClick={openUpgradeModal}
+            className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-700 transition-colors hover:bg-amber-200"
+          >
+            <Crown className="h-3 w-3" />
+            Upgrade to PRO
+          </button>
+        )}
+      </div>
 
       <div className="flex gap-2">
         <button
@@ -36,6 +58,16 @@ export default function ScreenshotButton({
           <Download className="h-4 w-4" />
           Download PNG
         </button>
+
+        {!isPremium && (
+          <button
+            onClick={handleHDDownload}
+            className="flex items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2.5 text-sm font-medium text-amber-700 transition-colors hover:bg-amber-100"
+          >
+            <Crown className="h-4 w-4" />
+            HD 4x
+          </button>
+        )}
 
         <button
           onClick={onToggleFrame}
@@ -49,6 +81,19 @@ export default function ScreenshotButton({
           Frame
         </button>
       </div>
+
+      {!isPremium && (
+        <p className="text-xs text-gray-400">
+          Free downloads include a small watermark.{" "}
+          <button
+            onClick={openUpgradeModal}
+            className="text-indigo-600 hover:underline"
+          >
+            Upgrade
+          </button>{" "}
+          to remove.
+        </p>
+      )}
     </div>
   );
 }

@@ -10,6 +10,7 @@ const navLinks = [
   { href: "/facebook", label: "Messenger", color: "#0084FF" },
   { href: "/instagram", label: "Instagram", color: "#E1306C" },
   { href: "/twitter", label: "X (Twitter)", color: "#1D9BF0" },
+  { href: "/blog", label: "Blog", color: "#6366F1" },
 ];
 
 export default function Navbar() {

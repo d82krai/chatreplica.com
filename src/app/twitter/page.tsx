@@ -54,7 +54,7 @@ export default function TwitterPage() {
       {/* SEO Content */}
       <section className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
         <h2 className="text-2xl font-bold text-gray-900">
-          Free X (Twitter) DM Fake Chat Generator
+          Free X (Twitter) DM Chat Mockup Generator
         </h2>
         <p className="mt-4 text-gray-600 leading-relaxed">
           Generate realistic X (formerly Twitter) Direct Message screenshots

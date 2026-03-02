@@ -26,7 +26,7 @@ export default function HowItWorks() {
           How It Works
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-center text-gray-600">
-          Create your fake chat screenshot in three simple steps.
+          Create your chat mockup screenshot in three simple steps.
         </p>
 
         <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">

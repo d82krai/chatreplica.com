@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import Disclaimer from "@/components/shared/Disclaimer";
+import { PremiumProvider } from "@/components/shared/PremiumProvider";
+import UpgradeModal from "@/components/shared/UpgradeModal";
 import "./globals.css";
 
 const inter = Inter({
@@ -67,10 +69,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} font-sans antialiased`}>
-        <Navbar />
-        <main className="min-h-screen">{children}</main>
-        <Disclaimer />
-        <Footer />
+        <PremiumProvider>
+          <Navbar />
+          <main className="min-h-screen">{children}</main>
+          <Disclaimer />
+          <Footer />
+          <UpgradeModal />
+        </PremiumProvider>
       </body>
     </html>
   );

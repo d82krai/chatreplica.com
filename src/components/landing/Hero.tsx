@@ -18,14 +18,14 @@ export default function Hero() {
         </div>
 
         <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
-          Create Realistic Fake
+          Create Realistic
           <span className="block bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-            Chat Screenshots
+            Chat Mockups
           </span>
         </h1>
 
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-gray-600 sm:text-xl">
-          Generate pixel-perfect fake chat conversations for WhatsApp, Facebook
+          Generate pixel-perfect chat mockups for WhatsApp, Facebook
           Messenger, Instagram DMs, and X (Twitter) DMs. Download as PNG
           instantly.
         </p>
@@ -43,7 +43,7 @@ export default function Hero() {
         </div>
 
         <p className="mt-8 text-sm text-gray-500">
-          No watermarks &middot; No data stored &middot; Works on all devices
+          Free to use &middot; No data stored &middot; Works on all devices
         </p>
       </div>
     </section>

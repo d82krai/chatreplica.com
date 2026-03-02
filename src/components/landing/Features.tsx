@@ -16,7 +16,7 @@ const features = [
   { icon: Image, title: "Retina Quality", desc: "2x resolution PNG downloads for crisp, clear images" },
   { icon: Clock, title: "Custom Timestamps", desc: "Auto-generated or manually set date and time for each message" },
   { icon: CheckCheck, title: "Read Receipts", desc: "Platform-specific delivery and read indicators" },
-  { icon: Globe, title: "100% Free", desc: "No sign-up, no watermarks, no limits — completely free" },
+  { icon: Globe, title: "Free to Start", desc: "No sign-up required. Create and download mockups instantly" },
   { icon: Palette, title: "Pixel-Perfect", desc: "Exact UI replication of each messaging platform" },
 ];
 
@@ -28,7 +28,7 @@ export default function Features() {
           Why Choose ChatReplica?
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-center text-gray-600">
-          Everything you need to create perfect fake chat screenshots.
+          Everything you need to create perfect chat mockup screenshots.
         </p>
 
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">

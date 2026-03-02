@@ -11,7 +11,7 @@ export default function Home() {
     name: "ChatReplica",
     url: "https://chatreplica.com",
     description:
-      "Free fake chat screenshot generator for WhatsApp, Facebook Messenger, Instagram DMs, and X (Twitter) DMs.",
+      "Free chat mockup screenshot generator for WhatsApp, Facebook Messenger, Instagram DMs, and X (Twitter) DMs.",
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Any",
     offers: {
