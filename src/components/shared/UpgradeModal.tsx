@@ -1,7 +1,9 @@
 "use client";
 
-import { X, Check, Crown } from "lucide-react";
+import { useState } from "react";
+import { X, Check, Crown, CheckCircle } from "lucide-react";
 import { usePremium } from "./PremiumProvider";
+import PayPalButton from "./PayPalButton";
 
 const features = [
   { label: "Export resolution", free: "2x Retina", premium: "4x Ultra HD" },
@@ -16,9 +18,49 @@ const features = [
 ];
 
 export default function UpgradeModal() {
-  const { showUpgradeModal, closeUpgradeModal } = usePremium();
+  const { showUpgradeModal, closeUpgradeModal, activatePremium } =
+    usePremium();
+  const [success, setSuccess] = useState(false);
 
   if (!showUpgradeModal) return null;
+
+  const handleSubscriptionApproved = (subscriptionId: string) => {
+    activatePremium(subscriptionId);
+    setSuccess(true);
+  };
+
+  if (success) {
+    return (
+      <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div
+          className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+          onClick={() => {
+            setSuccess(false);
+            closeUpgradeModal();
+          }}
+        />
+        <div className="relative w-full max-w-md rounded-2xl bg-white p-8 text-center shadow-2xl">
+          <CheckCircle className="mx-auto h-16 w-16 text-green-500" />
+          <h2 className="mt-4 text-2xl font-bold text-gray-900">
+            Welcome to Premium!
+          </h2>
+          <p className="mt-2 text-gray-600">
+            Your account has been upgraded. Enjoy HD exports, no watermarks, and
+            all premium features.
+          </p>
+          <button
+            onClick={() => {
+              setSuccess(false);
+              closeUpgradeModal();
+            }}
+            className="mt-6 w-full rounded-lg bg-indigo-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-indigo-700"
+          >
+            Start Creating
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
@@ -72,7 +114,11 @@ export default function UpgradeModal() {
                 {features.map((f, i) => (
                   <tr
                     key={f.label}
-                    className={i < features.length - 1 ? "border-b border-gray-100" : ""}
+                    className={
+                      i < features.length - 1
+                        ? "border-b border-gray-100"
+                        : ""
+                    }
                   >
                     <td className="px-4 py-2.5 text-gray-700">{f.label}</td>
                     <td className="px-4 py-2.5 text-center">
@@ -105,22 +151,29 @@ export default function UpgradeModal() {
             </table>
           </div>
 
-          {/* Pricing */}
-          <div className="mt-6 rounded-xl border-2 border-amber-200 bg-amber-50 p-5 text-center">
-            <div className="text-3xl font-bold text-gray-900">
-              $4.99
-              <span className="text-base font-normal text-gray-500">
-                /month
-              </span>
+          {/* Pricing + PayPal */}
+          <div className="mt-6 rounded-xl border-2 border-amber-200 bg-amber-50 p-5">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-gray-900">
+                $4.99
+                <span className="text-base font-normal text-gray-500">
+                  /month
+                </span>
+              </div>
+              <p className="mt-1 text-sm text-gray-600">
+                Cancel anytime. No commitment.
+              </p>
             </div>
-            <p className="mt-1 text-sm text-gray-600">
-              or $29.99 one-time lifetime access
-            </p>
-            <button className="mt-4 w-full rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 px-6 py-3 text-sm font-semibold text-white shadow-md transition-all hover:from-amber-600 hover:to-amber-700 hover:shadow-lg">
-              Upgrade Now
-            </button>
-            <p className="mt-2 text-xs text-gray-500">
-              Payment integration coming soon
+
+            <div className="mt-4">
+              <PayPalButton
+                onSubscriptionApproved={handleSubscriptionApproved}
+              />
+            </div>
+
+            <p className="mt-3 text-center text-xs text-gray-500">
+              Secure payment via PayPal. Cancel anytime from your PayPal
+              account.
             </p>
           </div>
         </div>

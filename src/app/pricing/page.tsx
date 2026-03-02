@@ -136,8 +136,7 @@ export default function PricingPage() {
         </div>
 
         <p className="mt-8 text-center text-sm text-gray-500">
-          Payment integration coming soon. All premium features will be
-          available once payment is set up.
+          Secure payment via PayPal. Cancel anytime from your PayPal account.
         </p>
       </div>
     </div>

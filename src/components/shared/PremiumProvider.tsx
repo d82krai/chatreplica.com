@@ -20,6 +20,7 @@ interface PremiumContextType {
   showUpgradeModal: boolean;
   openUpgradeModal: () => void;
   closeUpgradeModal: () => void;
+  activatePremium: (subscriptionId: string) => void;
 }
 
 const PremiumContext = createContext<PremiumContextType>({
@@ -29,6 +30,7 @@ const PremiumContext = createContext<PremiumContextType>({
   showUpgradeModal: false,
   openUpgradeModal: () => {},
   closeUpgradeModal: () => {},
+  activatePremium: () => {},
 });
 
 export function PremiumProvider({ children }: { children: React.ReactNode }) {
@@ -43,6 +45,13 @@ export function PremiumProvider({ children }: { children: React.ReactNode }) {
   const openUpgradeModal = useCallback(() => setShowUpgradeModal(true), []);
   const closeUpgradeModal = useCallback(() => setShowUpgradeModal(false), []);
 
+  const activatePremium = useCallback((subscriptionId: string) => {
+    localStorage.setItem("chatreplica_tier", "premium");
+    localStorage.setItem("chatreplica_subscription_id", subscriptionId);
+    setTier("premium");
+    setShowUpgradeModal(false);
+  }, []);
+
   const features = getFeatures(tier);
 
   return (
@@ -54,6 +63,7 @@ export function PremiumProvider({ children }: { children: React.ReactNode }) {
         showUpgradeModal,
         openUpgradeModal,
         closeUpgradeModal,
+        activatePremium,
       }}
     >
       {children}
