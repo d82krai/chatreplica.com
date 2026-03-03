@@ -43,7 +43,7 @@ export default function InstagramPreview({ state }: InstagramPreviewProps) {
   const inputPlaceholderColor = darkMode ? "#8E8E8E" : "#9CA3AF";
 
   return (
-    <PhoneFrame show={state.showPhoneFrame}>
+    <PhoneFrame deviceFrame={state.deviceFrame}>
       <div className="flex h-full flex-col" style={{ backgroundColor: containerBg }}>
         {/* Header */}
         <div

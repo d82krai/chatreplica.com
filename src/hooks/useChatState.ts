@@ -49,8 +49,8 @@ function chatReducer(state: ChatState, action: ChatAction): ChatState {
       return { ...state, messages: action.payload };
     case "CLEAR_MESSAGES":
       return { ...state, messages: [] };
-    case "TOGGLE_PHONE_FRAME":
-      return { ...state, showPhoneFrame: !state.showPhoneFrame };
+    case "SET_DEVICE_FRAME":
+      return { ...state, deviceFrame: action.payload };
     case "TOGGLE_KEYBOARD":
       return { ...state, showKeyboard: !state.showKeyboard };
     case "TOGGLE_DARK_MODE":
@@ -73,7 +73,7 @@ function createInitialState(platform: Platform): ChatState {
     },
     messages: [],
     platform,
-    showPhoneFrame: true,
+    deviceFrame: "iphone-16-pro",
     showKeyboard: false,
     darkMode: false,
     customBackground: null,

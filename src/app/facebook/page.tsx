@@ -6,6 +6,7 @@ import { useChatState } from "@/hooks/useChatState";
 import GeneratorLayout from "@/components/shared/GeneratorLayout";
 import ChatEditor from "@/components/chat/ChatEditor";
 import FacebookPreview from "@/components/previews/FacebookPreview";
+import DevicePicker from "@/components/chat/DevicePicker";
 
 export default function FacebookPage() {
   const { state, dispatch, addMessage } = useChatState("facebook");
@@ -49,6 +50,9 @@ export default function FacebookPage() {
         }
         preview={<FacebookPreview state={state} />}
         previewRef={previewRef}
+        previewControls={
+          <DevicePicker deviceFrame={state.deviceFrame} dispatch={dispatch} />
+        }
       />
 
       {/* SEO Content */}

@@ -67,7 +67,7 @@ export default function WhatsAppPreview({ state }: WhatsAppPreviewProps) {
     : "wa-chat-bg";
 
   return (
-    <PhoneFrame show={state.showPhoneFrame}>
+    <PhoneFrame deviceFrame={state.deviceFrame}>
       <div className={`flex h-full flex-col ${darkMode ? "bg-[#0B141A]" : ""}`}>
         {/* Header */}
         <div

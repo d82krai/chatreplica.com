@@ -33,8 +33,6 @@ export default function ChatEditor({
       <ScreenshotButton
         previewRef={previewRef}
         platform={platform}
-        showPhoneFrame={state.showPhoneFrame}
-        onToggleFrame={() => dispatch({ type: "TOGGLE_PHONE_FRAME" })}
         showKeyboard={state.showKeyboard}
         onToggleKeyboard={() => dispatch({ type: "TOGGLE_KEYBOARD" })}
         darkMode={state.darkMode}

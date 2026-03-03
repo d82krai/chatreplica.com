@@ -7,12 +7,14 @@ interface GeneratorLayoutProps {
   editor: React.ReactNode;
   preview: React.ReactNode;
   previewRef: React.RefObject<HTMLDivElement | null>;
+  previewControls?: React.ReactNode;
 }
 
 export default function GeneratorLayout({
   editor,
   preview,
   previewRef,
+  previewControls,
 }: GeneratorLayoutProps) {
   const [activeTab, setActiveTab] = useState<"edit" | "preview">("edit");
 
@@ -63,7 +65,10 @@ export default function GeneratorLayout({
         )}
         style={{ minHeight: "calc(100vh - 57px)" }}
       >
-        <div className="flex w-full flex-col items-center">
+        <div className="flex w-full flex-col items-center gap-4">
+          {previewControls && (
+            <div className="w-full max-w-[600px]">{previewControls}</div>
+          )}
           <div ref={previewRef}>{preview}</div>
         </div>
       </div>

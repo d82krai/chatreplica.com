@@ -6,6 +6,7 @@ import { useChatState } from "@/hooks/useChatState";
 import GeneratorLayout from "@/components/shared/GeneratorLayout";
 import ChatEditor from "@/components/chat/ChatEditor";
 import WhatsAppPreview from "@/components/previews/WhatsAppPreview";
+import DevicePicker from "@/components/chat/DevicePicker";
 
 export default function WhatsAppPage() {
   const { state, dispatch, addMessage } = useChatState("whatsapp");
@@ -49,6 +50,9 @@ export default function WhatsAppPage() {
         }
         preview={<WhatsAppPreview state={state} />}
         previewRef={previewRef}
+        previewControls={
+          <DevicePicker deviceFrame={state.deviceFrame} dispatch={dispatch} />
+        }
       />
 
       {/* SEO Content */}

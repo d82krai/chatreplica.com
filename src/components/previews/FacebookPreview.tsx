@@ -43,7 +43,7 @@ export default function FacebookPreview({ state }: FacebookPreviewProps) {
   const inputPlaceholderColor = darkMode ? "#B0B3B8" : "#9CA3AF";
 
   return (
-    <PhoneFrame show={state.showPhoneFrame}>
+    <PhoneFrame deviceFrame={state.deviceFrame}>
       <div className="flex h-full flex-col" style={{ backgroundColor: containerBg }}>
         {/* Header */}
         <div

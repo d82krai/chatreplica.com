@@ -6,6 +6,7 @@ import { useChatState } from "@/hooks/useChatState";
 import GeneratorLayout from "@/components/shared/GeneratorLayout";
 import ChatEditor from "@/components/chat/ChatEditor";
 import TwitterPreview from "@/components/previews/TwitterPreview";
+import DevicePicker from "@/components/chat/DevicePicker";
 
 export default function TwitterPage() {
   const { state, dispatch, addMessage } = useChatState("twitter");
@@ -49,6 +50,9 @@ export default function TwitterPage() {
         }
         preview={<TwitterPreview state={state} />}
         previewRef={previewRef}
+        previewControls={
+          <DevicePicker deviceFrame={state.deviceFrame} dispatch={dispatch} />
+        }
       />
 
       {/* SEO Content */}

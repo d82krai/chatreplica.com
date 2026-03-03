@@ -40,7 +40,7 @@ export interface ChatState {
   receiver: ReceiverProfile;
   messages: Message[];
   platform: Platform;
-  showPhoneFrame: boolean;
+  deviceFrame: import("@/lib/devices").DeviceFrameType;
   showKeyboard: boolean;
   darkMode: boolean;
   customBackground: string | null;
@@ -59,7 +59,7 @@ export type ChatAction =
   | { type: "DELETE_MESSAGE"; payload: string }
   | { type: "REORDER_MESSAGES"; payload: Message[] }
   | { type: "CLEAR_MESSAGES" }
-  | { type: "TOGGLE_PHONE_FRAME" }
+  | { type: "SET_DEVICE_FRAME"; payload: import("@/lib/devices").DeviceFrameType }
   | { type: "TOGGLE_KEYBOARD" }
   | { type: "TOGGLE_DARK_MODE" }
   | { type: "SET_CUSTOM_BACKGROUND"; payload: string | null };

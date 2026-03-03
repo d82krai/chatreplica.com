@@ -1,14 +1,12 @@
 "use client";
 
-import { Download, Smartphone, Keyboard, Moon } from "lucide-react";
+import { Download, Keyboard, Moon } from "lucide-react";
 import { captureScreenshot } from "@/lib/screenshot";
 import { Platform } from "@/lib/types";
 
 interface ScreenshotButtonProps {
   previewRef: React.RefObject<HTMLDivElement | null>;
   platform: Platform;
-  showPhoneFrame: boolean;
-  onToggleFrame: () => void;
   showKeyboard?: boolean;
   onToggleKeyboard?: () => void;
   darkMode?: boolean;
@@ -18,8 +16,6 @@ interface ScreenshotButtonProps {
 export default function ScreenshotButton({
   previewRef,
   platform,
-  showPhoneFrame,
-  onToggleFrame,
   showKeyboard,
   onToggleKeyboard,
   darkMode,
@@ -46,16 +42,6 @@ export default function ScreenshotButton({
         >
           <Download className="h-4 w-4" />
           Download HD PNG
-        </button>
-
-        <button
-          onClick={onToggleFrame}
-          className={`flex items-center gap-2 rounded-lg border px-3 py-2.5 text-sm font-medium transition-colors ${
-            showPhoneFrame ? activeClass : inactiveClass
-          }`}
-        >
-          <Smartphone className="h-4 w-4" />
-          Frame
         </button>
 
         {onToggleDarkMode && (

@@ -6,6 +6,7 @@ import { useChatState } from "@/hooks/useChatState";
 import GeneratorLayout from "@/components/shared/GeneratorLayout";
 import ChatEditor from "@/components/chat/ChatEditor";
 import InstagramPreview from "@/components/previews/InstagramPreview";
+import DevicePicker from "@/components/chat/DevicePicker";
 
 export default function InstagramPage() {
   const { state, dispatch, addMessage } = useChatState("instagram");
@@ -49,6 +50,9 @@ export default function InstagramPage() {
         }
         preview={<InstagramPreview state={state} />}
         previewRef={previewRef}
+        previewControls={
+          <DevicePicker deviceFrame={state.deviceFrame} dispatch={dispatch} />
+        }
       />
 
       {/* SEO Content */}
