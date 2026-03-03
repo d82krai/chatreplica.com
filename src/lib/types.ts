@@ -41,6 +41,9 @@ export interface ChatState {
   messages: Message[];
   platform: Platform;
   showPhoneFrame: boolean;
+  showKeyboard: boolean;
+  darkMode: boolean;
+  customBackground: string | null;
 }
 
 export type ChatAction =
@@ -56,4 +59,7 @@ export type ChatAction =
   | { type: "DELETE_MESSAGE"; payload: string }
   | { type: "REORDER_MESSAGES"; payload: Message[] }
   | { type: "CLEAR_MESSAGES" }
-  | { type: "TOGGLE_PHONE_FRAME" };
+  | { type: "TOGGLE_PHONE_FRAME" }
+  | { type: "TOGGLE_KEYBOARD" }
+  | { type: "TOGGLE_DARK_MODE" }
+  | { type: "SET_CUSTOM_BACKGROUND"; payload: string | null };

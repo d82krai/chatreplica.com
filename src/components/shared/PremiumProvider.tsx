@@ -1,69 +1,36 @@
 "use client";
 
-import {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useCallback,
-} from "react";
-import {
-  PremiumTier,
-  PremiumFeatures,
-  getFeatures,
-} from "@/lib/premium";
+import { createContext, useContext } from "react";
+import { PremiumFeatures, PREMIUM_FEATURES } from "@/lib/premium";
 
 interface PremiumContextType {
-  tier: PremiumTier;
-  features: PremiumFeatures;
   isPremium: boolean;
-  showUpgradeModal: boolean;
+  features: PremiumFeatures;
   openUpgradeModal: () => void;
   closeUpgradeModal: () => void;
+  showUpgradeModal: boolean;
   activatePremium: (subscriptionId: string) => void;
 }
 
 const PremiumContext = createContext<PremiumContextType>({
-  tier: "free",
-  features: getFeatures("free"),
-  isPremium: false,
-  showUpgradeModal: false,
+  isPremium: true,
+  features: PREMIUM_FEATURES,
   openUpgradeModal: () => {},
   closeUpgradeModal: () => {},
+  showUpgradeModal: false,
   activatePremium: () => {},
 });
 
 export function PremiumProvider({ children }: { children: React.ReactNode }) {
-  const [tier, setTier] = useState<PremiumTier>("free");
-  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
-
-  useEffect(() => {
-    const stored = localStorage.getItem("chatreplica_tier");
-    if (stored === "premium") setTier("premium");
-  }, []);
-
-  const openUpgradeModal = useCallback(() => setShowUpgradeModal(true), []);
-  const closeUpgradeModal = useCallback(() => setShowUpgradeModal(false), []);
-
-  const activatePremium = useCallback((subscriptionId: string) => {
-    localStorage.setItem("chatreplica_tier", "premium");
-    localStorage.setItem("chatreplica_subscription_id", subscriptionId);
-    setTier("premium");
-    setShowUpgradeModal(false);
-  }, []);
-
-  const features = getFeatures(tier);
-
   return (
     <PremiumContext.Provider
       value={{
-        tier,
-        features,
-        isPremium: tier === "premium",
-        showUpgradeModal,
-        openUpgradeModal,
-        closeUpgradeModal,
-        activatePremium,
+        isPremium: true,
+        features: PREMIUM_FEATURES,
+        openUpgradeModal: () => {},
+        closeUpgradeModal: () => {},
+        showUpgradeModal: false,
+        activatePremium: () => {},
       }}
     >
       {children}

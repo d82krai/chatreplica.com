@@ -1,13 +1,15 @@
 import { ChatState } from "@/lib/types";
 import { getDefaultAvatar } from "@/lib/utils";
-import { formatMessageTime, formatDateDividerFacebook, isSameDay } from "@/lib/time";
+import { formatDateDividerFacebook, isSameDay } from "@/lib/time";
 import PhoneFrame from "./PhoneFrame";
+import IosKeyboard from "./IosKeyboard";
 
 interface FacebookPreviewProps {
   state: ChatState;
 }
 
 export default function FacebookPreview({ state }: FacebookPreviewProps) {
+  const { darkMode } = state;
   const receiverAvatar = state.receiver.avatar || getDefaultAvatar();
   const { messages, receiver } = state;
 
@@ -27,11 +29,27 @@ export default function FacebookPreview({ state }: FacebookPreviewProps) {
     }
   }
 
+  // Dark mode colors
+  const containerBg = darkMode ? "#1C1E21" : "#FFFFFF";
+  const headerBorder = darkMode ? "#3A3B3C" : "#E5E7EB";
+  const nameColor = darkMode ? "#E4E6EB" : "#050505";
+  const statusColor = darkMode ? "#B0B3B8" : "#65676B";
+  const chatBg = darkMode ? "#1C1E21" : "#FFFFFF";
+  const receivedBg = darkMode ? "#3A3B3C" : "#E4E6EB";
+  const receivedText = darkMode ? "#E4E6EB" : "#050505";
+  const dateDividerColor = darkMode ? "#B0B3B8" : "#65676B";
+  const inputBarBorder = darkMode ? "#3A3B3C" : "#E5E7EB";
+  const inputFieldBg = darkMode ? "#3A3B3C" : "#F0F2F5";
+  const inputPlaceholderColor = darkMode ? "#B0B3B8" : "#9CA3AF";
+
   return (
     <PhoneFrame show={state.showPhoneFrame}>
-      <div className="flex h-full flex-col bg-white">
+      <div className="flex h-full flex-col" style={{ backgroundColor: containerBg }}>
         {/* Header */}
-        <div className="flex items-center gap-3 border-b border-gray-200 px-3 py-2.5">
+        <div
+          className="flex items-center gap-3 px-3 py-2.5 border-b"
+          style={{ backgroundColor: containerBg, borderColor: headerBorder }}
+        >
           <div className="relative">
             <img
               src={receiverAvatar}
@@ -39,21 +57,27 @@ export default function FacebookPreview({ state }: FacebookPreviewProps) {
               className="h-10 w-10 rounded-full object-cover"
             />
             {receiver.status === "online" && (
-              <div className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white bg-fb-active" />
+              <div
+                className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 bg-fb-active"
+                style={{ borderColor: containerBg }}
+              />
             )}
           </div>
           <div className="flex-1 min-w-0">
-            <div className="truncate text-base font-semibold text-fb-text">
+            <div className="truncate text-base font-semibold" style={{ color: nameColor }}>
               {receiver.name}
             </div>
             {statusText && (
-              <div className="text-xs text-fb-text-secondary">{statusText}</div>
+              <div className="text-xs" style={{ color: statusColor }}>{statusText}</div>
             )}
           </div>
         </div>
 
         {/* Messages */}
-        <div className="flex-1 space-y-1 overflow-y-auto px-3 py-3" style={{ minHeight: 300 }}>
+        <div
+          className="flex-1 space-y-1 overflow-y-auto px-3 py-3"
+          style={{ minHeight: 300, backgroundColor: chatBg }}
+        >
           {messages.map((msg, i) => {
             const showDateDivider =
               i === 0 || !isSameDay(messages[i - 1].timestamp, msg.timestamp);
@@ -62,7 +86,7 @@ export default function FacebookPreview({ state }: FacebookPreviewProps) {
               <div key={msg.id}>
                 {showDateDivider && (
                   <div className="my-3 flex justify-center">
-                    <span className="text-xs font-medium text-fb-text-secondary">
+                    <span className="text-xs font-medium" style={{ color: dateDividerColor }}>
                       {formatDateDividerFacebook(msg.timestamp)}
                     </span>
                   </div>
@@ -79,10 +103,9 @@ export default function FacebookPreview({ state }: FacebookPreviewProps) {
                   )}
                   <div
                     className={`max-w-[70%] rounded-[20px] px-3 py-2 ${
-                      msg.sender === "user"
-                        ? "bg-fb-blue text-white"
-                        : "bg-fb-received text-fb-text"
+                      msg.sender === "user" ? "bg-fb-blue text-white" : ""
                     }`}
+                    style={msg.sender === "other" ? { backgroundColor: receivedBg, color: receivedText } : {}}
                   >
                     <p className="text-sm" style={{ lineHeight: "1.35" }}>
                       {msg.text}
@@ -105,7 +128,7 @@ export default function FacebookPreview({ state }: FacebookPreviewProps) {
                 {msg.sender === "user" &&
                   msg.status !== "read" &&
                   (i === messages.length - 1 || messages[i + 1].sender !== "user") && (
-                    <div className="mt-0.5 text-right text-[10px] text-fb-text-secondary">
+                    <div className="mt-0.5 text-right text-[10px]" style={{ color: statusColor }}>
                       {msg.status === "sent"
                         ? "Sent"
                         : msg.status === "delivered"
@@ -119,7 +142,7 @@ export default function FacebookPreview({ state }: FacebookPreviewProps) {
 
           {messages.length === 0 && (
             <div className="flex h-full items-center justify-center pt-20">
-              <span className="text-xs text-fb-text-secondary">
+              <span className="text-xs" style={{ color: statusColor }}>
                 Messages will appear here
               </span>
             </div>
@@ -127,9 +150,15 @@ export default function FacebookPreview({ state }: FacebookPreviewProps) {
         </div>
 
         {/* Input bar */}
-        <div className="flex items-center gap-2 border-t border-gray-200 px-3 py-2">
-          <div className="flex h-9 flex-1 items-center rounded-full bg-gray-100 px-4">
-            <span className="text-sm text-gray-400">Aa</span>
+        <div
+          className="flex items-center gap-2 border-t px-3 py-2"
+          style={{ backgroundColor: containerBg, borderColor: inputBarBorder }}
+        >
+          <div
+            className="flex h-9 flex-1 items-center rounded-full px-4"
+            style={{ backgroundColor: inputFieldBg }}
+          >
+            <span className="text-sm" style={{ color: inputPlaceholderColor }}>Aa</span>
           </div>
           <div className="flex h-9 w-9 items-center justify-center">
             <svg className="h-6 w-6 text-fb-blue" fill="currentColor" viewBox="0 0 24 24">
@@ -137,6 +166,9 @@ export default function FacebookPreview({ state }: FacebookPreviewProps) {
             </svg>
           </div>
         </div>
+
+        {/* iOS Keyboard */}
+        {state.showKeyboard && <IosKeyboard dark={darkMode} />}
       </div>
     </PhoneFrame>
   );

@@ -51,6 +51,12 @@ function chatReducer(state: ChatState, action: ChatAction): ChatState {
       return { ...state, messages: [] };
     case "TOGGLE_PHONE_FRAME":
       return { ...state, showPhoneFrame: !state.showPhoneFrame };
+    case "TOGGLE_KEYBOARD":
+      return { ...state, showKeyboard: !state.showKeyboard };
+    case "TOGGLE_DARK_MODE":
+      return { ...state, darkMode: !state.darkMode };
+    case "SET_CUSTOM_BACKGROUND":
+      return { ...state, customBackground: action.payload };
     default:
       return state;
   }
@@ -68,6 +74,9 @@ function createInitialState(platform: Platform): ChatState {
     messages: [],
     platform,
     showPhoneFrame: true,
+    showKeyboard: false,
+    darkMode: false,
+    customBackground: null,
   };
 }
 

@@ -2,12 +2,14 @@ import { ChatState } from "@/lib/types";
 import { getDefaultAvatar } from "@/lib/utils";
 import { formatDateDividerInstagram, isSameDay } from "@/lib/time";
 import PhoneFrame from "./PhoneFrame";
+import IosKeyboard from "./IosKeyboard";
 
 interface InstagramPreviewProps {
   state: ChatState;
 }
 
 export default function InstagramPreview({ state }: InstagramPreviewProps) {
+  const { darkMode } = state;
   const receiverAvatar = state.receiver.avatar || getDefaultAvatar();
   const { messages, receiver } = state;
 
@@ -27,11 +29,27 @@ export default function InstagramPreview({ state }: InstagramPreviewProps) {
     }
   }
 
+  // Dark mode colors
+  const containerBg = darkMode ? "#000000" : "#FFFFFF";
+  const headerBorder = darkMode ? "#262626" : "#DBDBDB";
+  const nameColor = darkMode ? "#FAFAFA" : "#262626";
+  const statusColor = darkMode ? "#8E8E8E" : "#8E8E8E";
+  const onlineBorder = darkMode ? "#000000" : "#FFFFFF";
+  const receivedBg = darkMode ? "#262626" : "#EFEFEF";
+  const receivedText = darkMode ? "#FAFAFA" : "#262626";
+  const dateDividerColor = darkMode ? "#8E8E8E" : "#8E8E8E";
+  const inputBorder = darkMode ? "#363636" : "#DBDBDB";
+  const inputBg = darkMode ? "#000000" : "#FFFFFF";
+  const inputPlaceholderColor = darkMode ? "#8E8E8E" : "#9CA3AF";
+
   return (
     <PhoneFrame show={state.showPhoneFrame}>
-      <div className="flex h-full flex-col bg-white">
+      <div className="flex h-full flex-col" style={{ backgroundColor: containerBg }}>
         {/* Header */}
-        <div className="flex items-center gap-3 border-b border-ig-border px-3 py-2.5">
+        <div
+          className="flex items-center gap-3 border-b px-3 py-2.5"
+          style={{ backgroundColor: containerBg, borderColor: headerBorder }}
+        >
           <div className="relative">
             <img
               src={receiverAvatar}
@@ -39,21 +57,27 @@ export default function InstagramPreview({ state }: InstagramPreviewProps) {
               className="h-9 w-9 rounded-full object-cover"
             />
             {receiver.status === "online" && (
-              <div className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-white bg-green-500" />
+              <div
+                className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 bg-green-500"
+                style={{ borderColor: onlineBorder }}
+              />
             )}
           </div>
           <div className="flex-1 min-w-0">
-            <div className="truncate text-sm font-semibold text-ig-text">
+            <div className="truncate text-sm font-semibold" style={{ color: nameColor }}>
               {receiver.name}
             </div>
             {statusText && (
-              <div className="text-xs text-ig-text-secondary">{statusText}</div>
+              <div className="text-xs" style={{ color: statusColor }}>{statusText}</div>
             )}
           </div>
         </div>
 
         {/* Messages */}
-        <div className="flex-1 space-y-1 overflow-y-auto px-3 py-3" style={{ minHeight: 300 }}>
+        <div
+          className="flex-1 space-y-1 overflow-y-auto px-3 py-3"
+          style={{ minHeight: 300, backgroundColor: containerBg }}
+        >
           {messages.map((msg, i) => {
             const showDateDivider =
               i === 0 || !isSameDay(messages[i - 1].timestamp, msg.timestamp);
@@ -62,7 +86,7 @@ export default function InstagramPreview({ state }: InstagramPreviewProps) {
               <div key={msg.id}>
                 {showDateDivider && (
                   <div className="my-3 flex justify-center">
-                    <span className="text-xs text-ig-text-secondary">
+                    <span className="text-xs" style={{ color: dateDividerColor }}>
                       {formatDateDividerInstagram(msg.timestamp)}
                     </span>
                   </div>
@@ -79,10 +103,9 @@ export default function InstagramPreview({ state }: InstagramPreviewProps) {
                   )}
                   <div
                     className={`max-w-[70%] rounded-[22px] px-3.5 py-2 ${
-                      msg.sender === "user"
-                        ? "bg-ig-blue text-white"
-                        : "bg-ig-received text-ig-text"
+                      msg.sender === "user" ? "bg-ig-blue text-white" : ""
                     }`}
+                    style={msg.sender === "other" ? { backgroundColor: receivedBg, color: receivedText } : {}}
                   >
                     <p className="text-sm" style={{ lineHeight: "1.35" }}>
                       {msg.text}
@@ -92,7 +115,7 @@ export default function InstagramPreview({ state }: InstagramPreviewProps) {
 
                 {/* Seen indicator */}
                 {i === lastReadUserIndex && msg.sender === "user" && (
-                  <div className="mt-1 text-right text-[11px] text-ig-text-secondary">
+                  <div className="mt-1 text-right text-[11px]" style={{ color: statusColor }}>
                     Seen
                   </div>
                 )}
@@ -102,7 +125,7 @@ export default function InstagramPreview({ state }: InstagramPreviewProps) {
 
           {messages.length === 0 && (
             <div className="flex h-full items-center justify-center pt-20">
-              <span className="text-xs text-ig-text-secondary">
+              <span className="text-xs" style={{ color: statusColor }}>
                 Messages will appear here
               </span>
             </div>
@@ -110,11 +133,20 @@ export default function InstagramPreview({ state }: InstagramPreviewProps) {
         </div>
 
         {/* Input bar */}
-        <div className="flex items-center gap-2 border-t border-ig-border px-3 py-2">
-          <div className="flex h-10 flex-1 items-center rounded-full border border-ig-border px-4">
-            <span className="text-sm text-gray-400">Message...</span>
+        <div
+          className="flex items-center gap-2 border-t px-3 py-2"
+          style={{ backgroundColor: inputBg, borderColor: inputBorder }}
+        >
+          <div
+            className="flex h-10 flex-1 items-center rounded-full border px-4"
+            style={{ borderColor: inputBorder, backgroundColor: inputBg }}
+          >
+            <span className="text-sm" style={{ color: inputPlaceholderColor }}>Message...</span>
           </div>
         </div>
+
+        {/* iOS Keyboard */}
+        {state.showKeyboard && <IosKeyboard dark={darkMode} />}
       </div>
     </PhoneFrame>
   );
