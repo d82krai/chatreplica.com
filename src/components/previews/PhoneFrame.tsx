@@ -78,7 +78,7 @@ export default function PhoneFrame({ children, deviceFrame }: PhoneFrameProps) {
       <div
         style={{
           width: 375,
-          maxHeight: 812,
+          height: 812,
           borderRadius: config.outerRadius,
           border: `${config.frameWidth}px solid ${config.frameColor}`,
           overflow: "hidden",
