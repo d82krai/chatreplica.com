@@ -5,65 +5,6 @@ interface PhoneFrameProps {
   deviceFrame: DeviceFrameType;
 }
 
-function TopCutout({ type }: { type: "none" | "notch" | "dynamic-island" | "punch-hole" }) {
-  if (type === "dynamic-island") {
-    return (
-      <div
-        style={{
-          position: "absolute",
-          top: 10,
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: 126,
-          height: 34,
-          backgroundColor: "#000000",
-          borderRadius: 20,
-          zIndex: 20,
-          pointerEvents: "none",
-        }}
-      />
-    );
-  }
-  if (type === "notch") {
-    return (
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: 154,
-          height: 28,
-          backgroundColor: "#000000",
-          borderBottomLeftRadius: 18,
-          borderBottomRightRadius: 18,
-          zIndex: 20,
-          pointerEvents: "none",
-        }}
-      />
-    );
-  }
-  if (type === "punch-hole") {
-    return (
-      <div
-        style={{
-          position: "absolute",
-          top: 14,
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: 12,
-          height: 12,
-          backgroundColor: "#000000",
-          borderRadius: "50%",
-          zIndex: 20,
-          pointerEvents: "none",
-        }}
-      />
-    );
-  }
-  return null;
-}
-
 function HomeIndicator({ brand }: { brand: "Apple" | "Samsung" | "Google" }) {
   return (
     <div
@@ -156,7 +97,6 @@ export default function PhoneFrame({ children, deviceFrame }: PhoneFrameProps) {
             position: "relative",
           }}
         >
-          <TopCutout type={config.cutout} />
           {children}
           <HomeIndicator brand={config.brand} />
         </div>
